@@ -84,15 +84,15 @@ public class Controller_getAllScreens_b85a4c05e8_Test {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.openMocks(this);
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test
     public void testGetAllScreens_SuccessfulRetrieval() {
         // Arrange
         List<Screen> expectedScreens = new ArrayList<>();
-        expectedScreens.add(new Screen(new ObjectId().toString(), "Screen1", "Location1"));
-        expectedScreens.add(new Screen(new ObjectId().toString(), "Screen2", "Location2"));
+        expectedScreens.add(new Screen(new ObjectId().toHexString(), "Screen1", "Location1"));
+        expectedScreens.add(new Screen(new ObjectId().toHexString(), "Screen2", "Location2"));
         when(repository.findAll()).thenReturn(expectedScreens);
 
         // Act
