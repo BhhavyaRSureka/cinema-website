@@ -58,11 +58,14 @@ Please note that these test scenarios are high-level descriptions and would need
 // ********RoostGPT********
 package com.team.backend;
 
+import org.bson.types.ObjectId;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +73,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class Controller_getAllScreens_b85a4c05e8_Test {
 
     @Mock
@@ -87,8 +91,8 @@ public class Controller_getAllScreens_b85a4c05e8_Test {
     public void testGetAllScreens_SuccessfulRetrieval() {
         // Arrange
         List<Screen> expectedScreens = new ArrayList<>();
-        expectedScreens.add(new Screen(new ObjectId(), "Screen1", "Location1"));
-        expectedScreens.add(new Screen(new ObjectId(), "Screen2", "Location2"));
+        expectedScreens.add(new Screen(new ObjectId().toString(), "Screen1", "Location1"));
+        expectedScreens.add(new Screen(new ObjectId().toString(), "Screen2", "Location2"));
         when(repository.findAll()).thenReturn(expectedScreens);
 
         // Act
