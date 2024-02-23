@@ -58,7 +58,6 @@ Please note that these test scenarios are high-level descriptions and would need
 // ********RoostGPT********
 package com.team.backend;
 
-import org.bson.types.ObjectId;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -81,22 +80,27 @@ public class Controller_getAllScreens_b85a4c05e8_Test {
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
     public void testGetAllScreens_SuccessfulRetrieval() {
         // Arrange
         List<Screen> expectedScreens = new ArrayList<>();
-        expectedScreens.add(new Screen());
-        expectedScreens.add(new Screen());
+        expectedScreens.add(new Screen(new ObjectId(), "Screen1", "Location1"));
+        expectedScreens.add(new Screen(new ObjectId(), "Screen2", "Location2"));
         when(repository.findAll()).thenReturn(expectedScreens);
 
         // Act
         List<Screen> actualScreens = controller.getAllScreens();
 
         // Assert
-        assertEquals(expectedScreens, actualScreens);
+        assertEquals(expectedScreens.size(), actualScreens.size());
+        for (int i = 0; i < expectedScreens.size(); i++) {
+            assertEquals(expectedScreens.get(i).getId(), actualScreens.get(i).getId());
+            assertEquals(expectedScreens.get(i).getName(), actualScreens.get(i).getName());
+            assertEquals(expectedScreens.get(i).getLocation(), actualScreens.get(i).getLocation());
+        }
     }
 
     @Test
